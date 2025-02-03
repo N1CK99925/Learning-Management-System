@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.ProductManagement</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>ProductManagementSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JWT SpringBoot</name>
 	<description>JWT Spring boot</description>
