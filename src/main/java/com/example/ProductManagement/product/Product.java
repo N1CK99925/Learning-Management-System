@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "products")
+@Table
 public class Product {
     @Id
     @SequenceGenerator(
