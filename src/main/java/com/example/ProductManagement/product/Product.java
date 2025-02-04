@@ -1,18 +1,26 @@
 package com.example.ProductManagement.product;
+
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Entity
-@Table
+@Table(name = "products")
 public class Product {
     @Id
     @SequenceGenerator(
@@ -21,36 +29,24 @@ public class Product {
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+        strategy = GenerationType.SEQUENCE,
             generator = "product_sequence"
     )
-    private long id;
+    private int id;
     private String name;
-    private double price;
     private String description;
+    private double price;
+    private int quantity;
     private String category;
 
-
-
-public Product() {
+    public Product(String name, String description, double price, int quantity, String category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+    }
 }
 
 
-public Product(long id, String name, double price, String description, String category) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.description = description;
-    this.category = category;
-}
 
-public Product(String name, double price, String description, String category) {
-    this.name = name;
-    this.price = price;
-    this.description = description;
-    this.category = category;
-
-}
-
-
-}

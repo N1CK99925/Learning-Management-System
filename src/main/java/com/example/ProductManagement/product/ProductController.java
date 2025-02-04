@@ -8,18 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/v1/products") 
+@RequestMapping(path = "api/v1/product")
 public class ProductController {
-
     private final ProductService productService;
     
     public ProductController(ProductService productService) {
         this.productService = productService;
-    }
-
+    } 
     @GetMapping
-	public List<Product> getProducts() {
+    public List<Product> getProducts() {
         return productService.getProducts();
-
     }
 }
