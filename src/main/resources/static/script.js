@@ -33,3 +33,4 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     // Add your registration logic here
     console.log('Register:', username, email, password);
 });
+
