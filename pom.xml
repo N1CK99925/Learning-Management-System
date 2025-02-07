@@ -11,8 +11,8 @@
 	<groupId>com.example.ProductManagement</groupId>
 	<artifactId>ProductManagementSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>JWT SpringBoot</name>
-	<description>JWT Spring boot</description>
+	<name>ProductManagementSystem</name>
+	<description>ProductManagementSystem</description>
 	<url/>
 	<licenses>
 		<license/>
