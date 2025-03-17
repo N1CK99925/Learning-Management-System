@@ -31,7 +31,7 @@ public class Product {
         strategy = GenerationType.SEQUENCE,
             generator = "product_sequence"
     )
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private double price;

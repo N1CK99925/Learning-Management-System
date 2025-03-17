@@ -1,5 +1,9 @@
+//responsible of data acess (THis is a Data Aceess Layer)
 package com.example.ProductManagement.product;
-// Anything that is related to database will be done in this repo class , that accesses the database
-public class ProductRepository {
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    
 }
