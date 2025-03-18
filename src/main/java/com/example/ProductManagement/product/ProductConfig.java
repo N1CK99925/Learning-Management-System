@@ -19,11 +19,11 @@ public class ProductConfig {
                     "Courses"
             );
             Product product2 = new Product(
-                    "E-book 1",
-                    "its an E-book",
+                    "Course 2",
+                    "",
                     1299.99,
                     1,
-                    "Books"
+                    "Courses"
             );
             repository.saveAll(List.of(product1, product2));
                         
