@@ -1,6 +1,5 @@
 package com.example.ProductManagement.users;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,14 +21,6 @@ public class User {
 
     @Column(nullable = false)
     private String password;
-
     @Column(nullable = false)
-    private String name;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
-
-    private final boolean enabled = false; // For email verification
-
+    private String username;
 }
