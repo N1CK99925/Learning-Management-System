@@ -46,7 +46,7 @@ public class JwtService {
         try {
             Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
             return true;
-        } catch (ExpiredJwtException | MalformedJwtException | SignatureException e) {
+        } catch ( JwtException e) {
             return false;
         }
     }
