@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final Userservice userService;
 
+    @GetMapping("/test")
+    public ResponseEntity<String> getTrialEndPoint(){
+        return  ResponseEntity.ok("This is test message for a /test get endpoint at this route");
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestParam String email, @RequestParam String password) {
         userService.registerUser(email, password);
