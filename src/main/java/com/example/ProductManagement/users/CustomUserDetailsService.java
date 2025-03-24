@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .builder()
                 .username(user.getEmail())
                 .password(user.getPassword())  // Must be encoded
-                .roles("USER")
+                .roles("USER","ADMIN")
                 .build();
     }
 }

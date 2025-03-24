@@ -1,5 +1,6 @@
 package com.example.ProductManagement.config;
 
+import com.example.ProductManagement.JWT.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
