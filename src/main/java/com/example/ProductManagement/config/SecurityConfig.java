@@ -1,6 +1,8 @@
 package com.example.ProductManagement.config;
 
 import com.example.ProductManagement.JWT.JwtAuthenticationFilter;
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,8 +29,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/products").permitAll()
-                        .requestMatchers("/api/users/**").permitAll()
+                        .requestMatchers("/products").hasRole("USER")
+                        .requestMatchers("/api/users/**","/register").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/users/register").permitAll()
                           // Public authentication endpoints
                         .anyRequest().authenticated()
                 )
