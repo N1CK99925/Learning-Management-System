@@ -27,7 +27,8 @@ public class Userservice {
                 .email(userDTO.getEmail())
                 .username(userDTO.getUsername())
                 .password(encodedPassword)
-                .role(Role.ROLE_USER)  
+                .enabled(Boolean.TRUE)
+                .role(Role.ROLE_USER)
                 .build();
 
         return userRepository.save(newUser);
