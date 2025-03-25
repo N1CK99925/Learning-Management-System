@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    
+
     private final Userservice userService;
 
     @GetMapping("/test")
@@ -17,22 +19,20 @@ public class UserController {
     }
 
     @PostMapping("/register")
-public ResponseEntity<UserResponse> registerUser(
-        @RequestParam String username, 
-        @RequestParam String email, 
-        @RequestParam String password) {
+    public ResponseEntity<UserResponse> registerUser(@RequestBody Map<String, String> requestBody) {
 
-    System.out.println("Registration request received for email: " + email);
+        System.out.println("Registration request received for email: " + requestBody.get("email"));
 
-    UserDTO userDTO = new UserDTO();
-    userDTO.setEmail(email);
-    userDTO.setUsername(username);
-    userDTO.setPassword(password);
+        UserDTO user = new UserDTO();
+        user.setEmail(requestBody.get("email"));
+        user.setUsername(requestBody.get("username"));
+        user.setPassword(requestBody.get("password"));
 
-    User user = userService.registerUser(userDTO);
+        User savedUser = userService.registerUser(user);
 
-    return ResponseEntity.ok(new UserResponse(user.getId(), user.getEmail(), user.getUsername()));
-}
+        return ResponseEntity.ok(new UserResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUsername()));
+    }
+
 
 }
 
