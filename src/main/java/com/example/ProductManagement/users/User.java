@@ -28,7 +28,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
-
+    @Builder.Default
     @Column(nullable = true)
     private Boolean enabled = true;
 }
