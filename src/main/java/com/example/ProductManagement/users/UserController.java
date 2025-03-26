@@ -36,26 +36,25 @@ public class UserController {
 
 }
 
-// ✅ Fix: Ensure RegistrationRequest has username
+
 class RegistrationRequest {
     private String email;
     private String password;
-    private String username; // ✅ Added username field
-
-    // Getters and Setters
+    private String username; 
+    
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-    public String getUsername() { return username; } // ✅ Added getter
+    public String getUsername() { return username; } 
     public void setUsername(String username) { this.username = username; }
 }
 
-// ✅ Fix: Ensure UserResponse includes username
+
 class UserResponse {
     private Long id;
     private String email;
-    private String username; // ✅ Added username
+    private String username; 
 
     public UserResponse(Long id, String email, String username) {
         this.id = id;
@@ -63,8 +62,8 @@ class UserResponse {
         this.username = username;
     }
 
-    // Getters
+   
     public Long getId() { return id; }
     public String getEmail() { return email; }
-    public String getUsername() { return username; } // ✅ Added getter
+    public String getUsername() { return username; } 
 }

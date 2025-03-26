@@ -29,10 +29,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/products").hasRole("USER")
+                        .requestMatchers("/products").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/api/users/**","/register").permitAll()
                         .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
+                        .requestMatchers("/login").permitAll()
                           // Public authentication endpoints
                         .anyRequest().authenticated()
                 )
