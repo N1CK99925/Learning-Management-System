@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "YOUR_SECRET_KEY_CHANGE_THIS_TO_A_SECURE_ONE"; // Use env variables in production
+    private static final String SECRET_KEY = "it takes sec key froom env no need"; 
     private static final long EXPIRATION_TIME = 86400000; // 1 day
 
     private Key getSigningKey() {
@@ -51,3 +51,4 @@ public class JwtService {
         }
     }
 }
+// This Creates a Jwt token and validates when signing in

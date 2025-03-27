@@ -5,6 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.example.ProductManagement.JWT.JwtService;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -12,11 +17,12 @@ import java.util.Map;
 public class UserController {
 
     private final Userservice userService;
+    private final JwtService jwtService;
 
     @GetMapping("/test")
     public ResponseEntity<String> getTrialEndPoint() {
         return ResponseEntity.ok("This is a test message for a /test GET endpoint at this route.");
-    }
+    } 
 
     @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody Map<String, String> requestBody) {
@@ -33,7 +39,20 @@ public class UserController {
         return ResponseEntity.ok(new UserResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUsername()));
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody Map<String,String> requestBody) {
+        String email = requestBody.get("email");
+        String password = requestBody.get("password");
+        User user = userService.authenticateUser(email, password);
+        if (user == null) {
+            return ResponseEntity.status(401).body(Map.of("message","Invalid email or password"));
+        }
 
+        String token = jwtService.generateToken(user);
+        return ResponseEntity.ok(Map.of("token", token));
+    }
+    
+    //login hehe
 }
 
 
@@ -66,4 +85,4 @@ class UserResponse {
     public Long getId() { return id; }
     public String getEmail() { return email; }
     public String getUsername() { return username; } 
-}
+}//i can use lombok here but works

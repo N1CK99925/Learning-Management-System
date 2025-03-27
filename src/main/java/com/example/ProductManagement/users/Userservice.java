@@ -37,4 +37,15 @@ public class Userservice {
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+    public User authenticateUser(String email, String rawPassword) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (passwordEncoder.matches(rawPassword, user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
+}
+
 }
