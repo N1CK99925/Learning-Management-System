@@ -1,14 +1,18 @@
 package com.example.ProductManagement.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.ProductManagement.Admin.AdminService;
 import com.example.ProductManagement.product.Product;
 import com.example.ProductManagement.product.ProductService;
 
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -59,7 +63,34 @@ public class adminController {
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "redirect:/admin";
+
+        //new Shit
+ 
+    // make admin stuff
     }
+    @Autowired AdminService adminService;
+    // @PutMapping("/make-admin/{email}")
+    // public ResponseEntity<String> makeAdmin(@PathVariable String email) {
+    //     boolean success = adminService.makeAdmin(email);
+    //     return success ? ResponseEntity.ok("User Promoted to admin"):
+    //                      ResponseEntity.badRequest().body("User not Found");
+        
+        
+    // } cant use this due to using thymleaf and not js
+    @PostMapping("/make-admin")
+    public String makeAdmin(@RequestParam String email, RedirectAttributes redirectAttributes) {
+        boolean success = adminService.makeAdmin(email);
+        
+        if (success) {
+            redirectAttributes.addFlashAttribute("successMessage", "User promoted to admin!");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "User not found!");
+        }
+
+        return "redirect:/admin"; 
+
+
 }
 
 
+}
