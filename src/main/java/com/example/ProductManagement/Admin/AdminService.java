@@ -1,5 +1,6 @@
 package com.example.ProductManagement.Admin;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ import com.example.ProductManagement.users.UserRepository;
 public class AdminService {
     @Autowired
     private UserRepository userRepository;
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();// This Shit will fetch all users
+    }
 
     public boolean makeAdmin(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);

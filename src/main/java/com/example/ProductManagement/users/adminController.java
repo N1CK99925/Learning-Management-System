@@ -26,6 +26,9 @@ public class adminController {
     public String adminDashboard(Model model) {
         List<Product> products = productService.getProducts();
         model.addAttribute("products", products);
+        List<User> users = adminService.getAllUsers();
+        model.addAttribute("users", users);
+
         return "admin"; // Refers to admin.html
     }
 
@@ -91,6 +94,13 @@ public class adminController {
 
 
 }
+    
+    @GetMapping("/admin")
+    public String showUsers(Model model){
+        List<User> users = adminService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin";
+    }
 
 
 }
