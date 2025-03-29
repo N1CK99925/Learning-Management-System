@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
+    private final CourseRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(CourseRepository productRepository) {
         this.productRepository = productRepository;
     }
 

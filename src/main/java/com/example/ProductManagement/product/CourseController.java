@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class ProductController {
+public class CourseController {
 
     @Autowired
     private ProductService productService;
