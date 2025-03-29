@@ -13,19 +13,19 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getProducts() {
+    public List<Course> getCourses() {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Product product) {
+    public void saveCourse(Course product) {
         productRepository.save(product);
     }
 
-    public Product getProductById(Long id) {
+    public Course getCourseById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteCourse(Long id) {
         productRepository.deleteById(id);
     }
 }

@@ -158,7 +158,7 @@
                             <th>ID</th>
                             <th>Course Name</th>
                             <th>Description</th>
-                            <th>Price ($)</th>
+                            <!-- <th>Price ($)</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -167,7 +167,7 @@
                             <td th:text="${product.id}"></td>
                             <td th:text="${product.name}"></td>
                             <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
+                            <!-- <td th:text="${product.price}"></td> -->
                             <td>
                                 <a th:href="@{/admin/edit/{id}(id=${product.id})}" class="btn-edit">✏️ Edit</a>
                                 <a th:href="@{/admin/delete/{id}(id=${product.id})}" class="btn-delete"
@@ -197,7 +197,7 @@
     <p th:text="${errorMessage}"></p>
 </div>
 <h2>All Users</h2>
-<table border="1">
+<table class="admin-table">
     <tr>
         <th>ID</th>
         <th>Email</th>
@@ -211,10 +211,11 @@
         <td>
             <form th:action="@{/admin/make-admin}" method="post">
                 <input type="hidden" name="email" th:value="${user.email}">
-                <button type="submit" th:if="${user.role != 'ROLE_ADMIN'}">Make Admin</button>
+                <button type="submit" th:if="${user.role != 'ROLE_ADMIN'}" class="add-course-btn">Make Admin</button>
             </form>
         </td>
     </tr>
 </table>
 </body>
 </html>
+

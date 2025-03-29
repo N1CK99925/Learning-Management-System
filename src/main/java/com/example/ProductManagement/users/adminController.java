@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.ProductManagement.Admin.AdminService;
-import com.example.ProductManagement.product.Product;
+import com.example.ProductManagement.product.Course;
 import com.example.ProductManagement.product.ProductService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class adminController {
     // Admin Dashboard
     @GetMapping("")
     public String adminDashboard(Model model) {
-        List<Product> products = productService.getProducts();
+        List<Course> products = productService.getCourses();
         model.addAttribute("products", products);
         List<User> users = adminService.getAllUsers();
         model.addAttribute("users", users);
@@ -35,36 +35,36 @@ public class adminController {
     // Show Add Product Form
     @GetMapping("/add")
     public String showAddProductForm(Model model) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new Course());
         return "add-product"; // Refers to add-product.html
     }
 
     // Handle Add Product
     @PostMapping("/save")
-    public String saveProduct(@ModelAttribute Product product) {
-        productService.saveProduct(product);
+    public String saveProduct(@ModelAttribute Course product) {
+        productService.saveCourse(product);
         return "redirect:/admin";
     }
 
     // Show Edit Product Form
     @GetMapping("/edit/{id}")
     public String showEditProductForm(@PathVariable Long id, Model model) {
-        Product product = productService.getProductById(id);
+        Course product = productService.getCourseById(id);
         model.addAttribute("product", product);
         return "edit-product"; // Refers to edit-product.html
     }
 
     // Handle Edit Product
     @PostMapping("/update")
-    public String updateProduct(@ModelAttribute Product product) {
-        productService.saveProduct(product);
+    public String updateProduct(@ModelAttribute Course product) {
+        productService.saveCourse(product);
         return "redirect:/admin";
     }
 
     // Delete Product
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
+        productService.deleteCourse(id);
         return "redirect:/admin";
 
         //new Shit

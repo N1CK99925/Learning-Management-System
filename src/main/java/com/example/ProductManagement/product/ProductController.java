@@ -12,9 +12,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products")
+    @GetMapping("/Courses")
     public String getProducts(Model model) {
-        List<Product> products = productService.getProducts();
+        List<Course> products = productService.getCourses();
         model.addAttribute("products", products);
         return "products"; // Refers to products.html in templates folder
     }

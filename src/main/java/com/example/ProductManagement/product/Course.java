@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table
-public class Product {
+public class Course {
     @Id
     @SequenceGenerator(
             name = "product_sequence",
@@ -38,7 +38,7 @@ public class Product {
     private int quantity;
     private String category;
 
-    public Product(String name, String description, double price, int quantity, String category) {
+    public Course(String name, String description, double price, int quantity, String category) {
         this.name = name;
         this.description = description;
         this.price = price;
