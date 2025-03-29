@@ -1,10 +1,15 @@
 package com.example.ProductManagement.product;
 
 
+import java.util.List;
+
+import com.example.ProductManagement.Enrollment.Enrollment;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,13 +43,19 @@ public class Course {
     private int quantity;
     private String category;
 
+    @OneToMany(mappedBy = "course")
+    private List<Enrollment> enrollments;
+
     public Course(String name, String description, double price, int quantity, String category) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.category = category;
+
     }
+
+
 }
 
 

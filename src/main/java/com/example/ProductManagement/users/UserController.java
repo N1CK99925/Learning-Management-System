@@ -46,6 +46,7 @@ public class UserController {
         User user = userService.authenticateUser(email, password);
         if (user == null) {
             return ResponseEntity.status(401).body(Map.of("message","Invalid email or password"));
+            
         }
 
         String token = jwtService.generateToken(user);

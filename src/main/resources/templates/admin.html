@@ -135,11 +135,79 @@
                 font-size: 0.9rem;
             }
         }
+        .claude-navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            border-bottom: 3px solid var(--claude-orange);
+        }
+        .nav-link {
+            color: var(--claude-grey-medium);
+            font-weight: 500;
+            margin: 0 12px;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--claude-orange);
+        }
+        .claude-logo {
+            font-weight: 700;
+            color: var(--claude-grey-dark);
+        }
+        
+        .claude-logo span {
+            color: var(--claude-orange);
+        }
+        .navbar-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 20px;
+        }
+        
+        .logo {
+          font-weight: bold;
+          font-size: 24px;
+          color: #FF7A45; /* Using your orange theme color */
+        }
+        
+        .nav-links {
+          display: flex;
+          gap: 20px;
+        }
+        
+        .nav-links a {
+          text-decoration: none;
+          color: #333333;
+          font-weight: 500;
+          transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+          color: #FF7A45;
+        }
+        
+        .nav-links a.active {
+          color: #FF7A45;
+          border-bottom: 2px solid #FF7A45;
+        }
         </style>
 </head>
 <body>
     <!-- <div th:replace="fragments/navbar :: navbar"></div> -->
+
     
+      
+      <div class="navbar-container">
+        <div class="logo">LMS</div>
+        <div class="nav-links">
+          <a href="#" class="active">Home</a>
+          <a href="#">Courses</a>
+          <a href="#">Resources</a>
+          <a href="#">Account</a>
+        </div>
+      </div>
     <div class="container-fluid">
         <div class="admin-container">
             <div class="admin-header">

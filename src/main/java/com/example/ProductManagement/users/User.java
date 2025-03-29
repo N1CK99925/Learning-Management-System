@@ -1,5 +1,10 @@
 package com.example.ProductManagement.users;
 
+import java.util.List;
+
+import com.example.ProductManagement.Enrollment.Enrollment;
+
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,4 +36,9 @@ public class User {
     @Builder.Default
     @Column(nullable = true)
     private Boolean enabled = true;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<Enrollment> enrollments;
+   
 }
