@@ -22,7 +22,8 @@ public class ProductService {
     }
 
     public Course getCourseById(Long id) {
-        return productRepository.findById(id).orElse(null);
+        return productRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Course not found!"));
     }
 
     public void deleteCourse(Long id) {

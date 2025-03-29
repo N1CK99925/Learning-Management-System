@@ -18,4 +18,15 @@ public class EnrollmentService {
     public List<Course> getEnrolledCourse(User user) {
         return enrollmentRepository.findByUser(user).stream().map(Enrollment::getCourse).collect(Collectors.toList());
     }
+    public void enrollUser(User user, Course course) {
+        // Check if user is already enrolled
+        if (enrollmentRepository.existsByUserAndCourse(user, course)) {
+            throw new RuntimeException("User is already enrolled in this course.");
+        }
+        
+        Enrollment enrollment = new Enrollment();
+        enrollment.setUser(user);
+        enrollment.setCourse(course);
+        enrollmentRepository.save(enrollment);
+    }
 }

@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/home").permitAll()
+                        .requestMatchers("enrollments/**").permitAll()
                           // Public authentication endpoints
                         .anyRequest().authenticated()
                 )
