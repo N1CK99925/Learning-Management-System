@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
-    private static final String SECRET_KEY = "it takes sec key froom env no need"; 
+public class JwtService { //This is a random hardcoded jwt key , pls use a diff key for production
+    private static final String SECRET_KEY = "ee05c8dde4181f50d3fe7e03975921f2f559abb7a8bcc67ca7dc106f50a8c5489f3e42dcb08812c23d0afe20ab5c2fb1576455c10978fa8f96ae79b0fc5318de28d2a2202a99500287546f687fd2d203c3e674170712aef30cdfaa5c852a3cb812fe6a2fcabfec4f5c1aa4126353b2cf3e80967e8fee581afab76fec283bc40397f1605fac570c24ff4abe4e613222d533d8354436be770efe7c7ac72f9fa4acba4432f29076283db69b515e55036911891340be0ac6b189280c731b11c45b62f63f3ddfa02b82982ebcbeb2254955cde7c040b9868d5cc9d3fbe2c488095802fa634f40e3a5e21d57179b3a9884e6821ded00d8a9c1efba0380520b27a3e9aa";//Do not change this hardcoded key pls paarth or anyone 
     private static final long EXPIRATION_TIME = 86400000; // 1 day
 
     private Key getSigningKey() {
