@@ -3,8 +3,10 @@ package com.example.ProductManagement.product;
 
 import java.util.List;
 
+import com.example.ProductManagement.CourseMaterial.CourseMaterial;
 import com.example.ProductManagement.Enrollment.Enrollment;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -54,6 +56,9 @@ public class Course {
         this.category = category;
 
     }
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    private List<CourseMaterial> courseMaterials;
+
 
 
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.ProductManagement.JWT.JwtService;
+// import com.example.ProductManagement.JWT.JwtService;
 
 
 @RestController
@@ -17,7 +17,7 @@ import com.example.ProductManagement.JWT.JwtService;
 public class UserController {
 
     private final Userservice userService;
-    private final JwtService jwtService;
+    // private final JwtService jwtService;
 
     @GetMapping("/test")
     public ResponseEntity<String> getTrialEndPoint() {
@@ -39,19 +39,19 @@ public class UserController {
         return ResponseEntity.ok(new UserResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUsername()));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody Map<String,String> requestBody) {
-        String email = requestBody.get("email");
-        String password = requestBody.get("password");
-        User user = userService.authenticateUser(email, password);
-        if (user == null) {
-            return ResponseEntity.status(401).body(Map.of("message","Invalid email or password"));
+    // @PostMapping("/login")
+    // public ResponseEntity<?> loginUser(@RequestBody Map<String,String> requestBody) {
+    //     String email = requestBody.get("email");
+    //     String password = requestBody.get("password");
+    //     User user = userService.authenticateUser(email, password);
+    //     if (user == null) {
+    //         return ResponseEntity.status(401).body(Map.of("message","Invalid email or password"));
             
-        }
+    //     }
 
-        String token = jwtService.generateToken(user);
-        return ResponseEntity.ok(Map.of("token", token));
-    }
+    //     String token = jwtService.generateToken(user);
+    //     return ResponseEntity.ok(Map.of("token", token));
+    // }
     
     //login hehe
 }
