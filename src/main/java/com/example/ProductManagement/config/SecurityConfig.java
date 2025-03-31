@@ -29,14 +29,15 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/courses").permitAll()
+                        .requestMatchers("/courses").hasRole("USER")
                         .requestMatchers("/api/users/**","/register").permitAll()
                         .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/home").permitAll()
-                        .requestMatchers("enrollments/**").permitAll()
+                        .requestMatchers("/enrollments/**").permitAll()
+                        .requestMatchers("/logout").permitAll()
                           // Public authentication endpoints
                         .anyRequest().authenticated()
                 )
