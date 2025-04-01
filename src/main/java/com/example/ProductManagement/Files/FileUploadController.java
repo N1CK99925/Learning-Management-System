@@ -17,6 +17,12 @@ public class FileUploadController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        String contentType = file.getContentType();
+    if (contentType == null || !contentType.equalsIgnoreCase("application/pdf")) {
+        return ResponseEntity.badRequest().body("Only PDF files are allowed!");
+    }
+
+       
         try {
             String filePath = fileStorageService.saveFile(file);
             return ResponseEntity.ok("File uploaded successfully: " + filePath);
@@ -24,4 +30,8 @@ public class FileUploadController {
             return ResponseEntity.status(500).body("File upload failed: " + e.getMessage());
         }
     }
-}
+//     @GetMapping("/upload")
+//     public String showUploadForm() {
+//         return "upload"; // Thymeleaf template for the upload form
+//     }
+ }

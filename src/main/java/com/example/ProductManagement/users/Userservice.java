@@ -38,15 +38,15 @@ public class Userservice {
         return userRepository.findByEmail(email);
         
     }
-    public User authenticateUser(String email, String rawPassword) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-                return user;
-            }
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Invalid password");
         }
-        return null;
-}
+        
+        return user;
+    }
 
 }
