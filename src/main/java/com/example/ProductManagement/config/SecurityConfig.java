@@ -43,11 +43,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/home").authenticated()
-                        .requestMatchers("/enrollments/**").permitAll()
+                        .requestMatchers("/enrollments/**").authenticated()
                         .requestMatchers("/logout").permitAll()
                         .requestMatchers("/api/files/upload").permitAll()
                         .requestMatchers("/upload").permitAll()
                         .requestMatchers("/logout").permitAll()
+                        
                           // Public authentication endpoints
                         .anyRequest().authenticated()
                 )
