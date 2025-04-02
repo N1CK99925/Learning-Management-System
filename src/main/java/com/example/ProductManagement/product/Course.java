@@ -7,6 +7,7 @@ import com.example.ProductManagement.CourseMaterial.CourseMaterial;
 import com.example.ProductManagement.Enrollment.Enrollment;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,6 +45,9 @@ public class Course {
     private double price;
     private int quantity;
     private String category;
+
+    @ElementCollection
+    private List<String> pdfFiles;
 
     @OneToMany(mappedBy = "course")
     private List<Enrollment> enrollments;

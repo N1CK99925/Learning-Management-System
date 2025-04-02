@@ -6,6 +6,7 @@ import com.example.ProductManagement.JWT.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,20 +36,29 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/courses").authenticated()
+                        .requestMatchers("/courses","/error").authenticated()
                         .requestMatchers("/api/users/**","/register").permitAll()
                         .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/home").authenticated()
                         .requestMatchers("/enrollments/**").permitAll()
                         .requestMatchers("/logout").permitAll()
                         .requestMatchers("/api/files/upload").permitAll()
                         .requestMatchers("/upload").permitAll()
+                        .requestMatchers("/logout").permitAll()
                           // Public authentication endpoints
                         .anyRequest().authenticated()
                 )
+                .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/courses",true)
+                .failureUrl("/login?error=true")
+                .permitAll())
+
+                .logout(logout -> logout.logoutUrl("/logout").permitAll())
+                
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

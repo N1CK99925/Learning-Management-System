@@ -284,6 +284,47 @@
         </td>
     </tr>
 </table>
+<h2>Upload PDF for Course</h2>
+<!-- <p th:if="${message}" th:text="${message}" style="color: red;"></p> -->
+
+<form method="POST" action="/admin/files/upload" enctype="multipart/form-data">
+    <label for="course">Select Course:</label>
+    <select name="course_id" id="course" required>
+        <option th:each="course : ${course}" 
+                th:value="${course.id}" 
+                th:text="${course.name}">
+        </option>
+    </select>
+
+    <input type="file" name="file" accept="application/pdf" required>
+    <button type="submit">Upload PDF</button>
+</form>
+
+<h3>Uploaded PDFs</h3>
+<div th:each="course : ${courses}">
+    <h4 th:text="${course.name}"></h4>
+    <ul>
+        <li th:each="pdf : ${course.pdfFiles}">
+            <a th:href="@{'/download/' + ${pdf}}" th:text="${pdf}"></a>
+        </li>
+    </ul>
+</div>
+<table>
+    <tr>
+        <th>Course Name</th>
+        <th>Uploaded PDFs</th>
+    </tr>
+    <tr th:each="course : ${courses}">
+        <td th:text="${course.name}"></td>
+        <td>
+            <ul>
+                <li th:each="file : ${courseFiles[course.id]}">
+                    <a th:href="@{'/uploads/course_' + ${course.id} + '/' + ${file}}" th:text="${file}"></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
 
