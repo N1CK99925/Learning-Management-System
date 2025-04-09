@@ -23,10 +23,16 @@ public class EnrollmentService {
         if (enrollmentRepository.existsByUserAndCourse(user, course)) {
             throw new RuntimeException("User is already enrolled in this course.");
         }
-        
+        System.out.println("User"+user.getId());
         Enrollment enrollment = new Enrollment();
         enrollment.setUser(user);
         enrollment.setCourse(course);
         enrollmentRepository.save(enrollment);
+    }
+    public List<Course> getEnrolledCourses(User user) {
+        List<Enrollment> enrollments = enrollmentRepository.findByuserId(user.getId());
+        return enrollments.stream()
+                          .map(Enrollment::getCourse)
+                          .collect(Collectors.toList());
     }
 }

@@ -36,7 +36,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/courses","/error").authenticated()
+                        .requestMatchers("/courses").authenticated()
                         .requestMatchers("/api/users/**","/register").permitAll()
                         .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
@@ -48,6 +48,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/files/upload").permitAll()
                         .requestMatchers("/upload").permitAll()
                         .requestMatchers("/logout").permitAll()
+                        .requestMatchers("/my-courses").authenticated()
+                        .requestMatchers("/error").permitAll()
                         
                           // Public authentication endpoints
                         .anyRequest().authenticated()
@@ -55,7 +57,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/courses",true)
-                .failureUrl("/login?error=true")
+                // .failureUrl("/login?error=true")
                 .permitAll())
 
                 .logout(logout -> logout.logoutUrl("/logout").permitAll())

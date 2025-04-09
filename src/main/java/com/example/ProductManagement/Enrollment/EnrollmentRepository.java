@@ -12,4 +12,6 @@ import com.example.ProductManagement.users.User;
 public interface EnrollmentRepository extends JpaRepository<Enrollment,Long>{
     List<Enrollment> findByUser(User user);
     boolean existsByUserAndCourse(User user, Course course);
+    List<Enrollment> findByuserId(Long userid);
+    
 }

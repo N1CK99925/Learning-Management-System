@@ -31,7 +31,7 @@ public class Enrollmentcontroller {
     public ResponseEntity<String> enrollUser(@RequestParam String email, @RequestParam Long courseId) {
         Optional<User> userOptional = userservice.getUserByEmail(email);
         
-
+        
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             Course course = productService.getCourseById(courseId);

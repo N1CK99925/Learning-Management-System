@@ -44,11 +44,15 @@ public class CourseController {
             User user = userOptional.get();
             List<Course> courses = enrollmentService.getEnrolledCourse(user);
             model.addAttribute("courses", courses);
+            System.out.println("Logged-in email: " + email);// debug
+            System.out.println("User ID: " + user.getId());
+
             return "my-courses";
+            
         } else {
             // Handle the case where the user is not found
             return "error-page"; // Redirect to an error page or handle it gracefully
-        }
+        }// error page will be made at last
     }
     }
     
