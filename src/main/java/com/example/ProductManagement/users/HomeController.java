@@ -17,6 +17,8 @@ public class HomeController {
     @GetMapping
     public String home(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        System.out.println("Testing Session Home :");
+        System.out.println(session.getAttribute("user"));
         if (user == null) {
             return "redirect:/login"; // Redirect if not logged in
         }

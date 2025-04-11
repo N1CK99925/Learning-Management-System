@@ -1,8 +1,16 @@
 package com.example.ProductManagement.users;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpSession;
+
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.ProductManagement.JWT.JwtService;
 
@@ -17,8 +25,15 @@ import java.util.Map;
 public class UserController {
 
     private final Userservice userService;
+    private CustomUserDetailsService userDetailsService;
     private final JwtService jwtService;
-    // private final JwtService jwtService;
+
+    @Autowired
+    public UserController(Userservice userService, CustomUserDetailsService userDetailsService, JwtService jwtService) {
+        this.userService = userService;
+        this.userDetailsService = userDetailsService;
+        this.jwtService = jwtService;
+    }
 
     @GetMapping("/test")
     public ResponseEntity<String> getTrialEndPoint() {
@@ -40,28 +55,39 @@ public class UserController {
         return ResponseEntity.ok(new UserResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUsername()));
     }
 
-    @PostMapping("/login")
-public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
-    // String email = requestBody.get("email");
-    // String password = requestBody.get("password");
-    
+
+
     try {
         User user = userService.authenticateUser(email, password);
         if (user == null) {
             return ResponseEntity.status(401).body(Map.of("message", "Invalid email or password"));
         }
-        
+
         String token = jwtService.generateToken(user);
+        String username = jwtService.extractUsername(token);
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        String credentials = userDetails.getAuthorities().toString();
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(userDetails, credentials, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        session.setAttribute("JWT_TOKEN", token);
+        session.setAttribute("user", user.getId());
+        session.setAttribute("email", user.getEmail());
+        System.out.println("Testing Session :");
+        System.out.println(session.getAttribute("user"));
         return ResponseEntity.ok(Map.of(
-            "token", token,
-            "id", user.getId(),
-            "email", user.getEmail(),
-            "username", user.getUsername()
+                "token", token,
+                "id", user.getId(),
+                "email", user.getEmail(),
+                "username", user.getUsername()
         ));
     } catch (Exception e) {
         return ResponseEntity.status(401).body(Map.of("message", e.getMessage()));
     }
 }
+
     // @PostMapping("/login")
     // public ResponseEntity<?> loginUser(@RequestBody Map<String,String> requestBody) {
     //     String email = requestBody.get("email");
