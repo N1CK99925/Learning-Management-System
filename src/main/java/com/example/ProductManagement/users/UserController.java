@@ -55,8 +55,8 @@ public class UserController {
         return ResponseEntity.ok(new UserResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUsername()));
     }
 
-@PostMapping("/login")
-public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password, HttpSession session) {
+
+
     try {
         User user = userService.authenticateUser(email, password);
         if (user == null) {

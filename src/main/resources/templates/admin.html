@@ -290,7 +290,7 @@
 <form method="POST" action="/admin/files/upload" enctype="multipart/form-data">
     <label for="course">Select Course:</label>
     <select name="course_id" id="course" required>
-        <option th:each="course : ${course}" 
+        <option th:each="course : ${courses}" 
                 th:value="${course.id}" 
                 th:text="${course.name}">
         </option>
