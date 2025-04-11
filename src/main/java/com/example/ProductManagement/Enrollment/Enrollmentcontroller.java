@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
-@RequestMapping("/enrollments")
+@RequestMapping("/api/enrollments")
 public class Enrollmentcontroller {
     @Autowired EnrollmentService enrollmentService;
 

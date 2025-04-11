@@ -41,9 +41,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-public ResponseEntity<?> loginUser(@RequestBody Map<String, String> requestBody) {
-    String email = requestBody.get("email");
-    String password = requestBody.get("password");
+public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
+    // String email = requestBody.get("email");
+    // String password = requestBody.get("password");
     
     try {
         User user = userService.authenticateUser(email, password);
