@@ -4,7 +4,6 @@ package com.example.ProductManagement.users;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,15 +23,15 @@ public class UserController {
 
     
     private final Userservice userService;
-    private CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
     private final JwtService jwtService;
-    
-   
-    public UserController(Userservice userService, CustomUserDetailsService userDetailsService, JwtService jwtService) {
-        this.userService = userService;
-        this.userDetailsService = userDetailsService;
-        this.jwtService = jwtService;
-    }
+     
+    //  @Autowired
+    // public UserController(Userservice userService, CustomUserDetailsService userDetailsService, JwtService jwtService) {
+    //     this.userService = userService;
+    //     this.userDetailsService = userDetailsService;
+    //     this.jwtService = jwtService;
+    // }
 
     @GetMapping("/test")
     public ResponseEntity<String> getTrialEndPoint() {
