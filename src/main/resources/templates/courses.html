@@ -137,19 +137,24 @@
         <div class="row">
             <!-- Loop through all products -->
             <div class="col-md-4" th:each="product : ${products}">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title mb-0" th:text="${product.name}">Course Name</h5>
-                            <span class="badge-claude">New</span>
-                        </div>
-                        <p class="card-text mb-4" th:text="${product.description}">Course Description</p>
-                        <!-- <p class="card-text"><strong>Price: $</strong><span th:text="${product.price}">0.00</span></p> -->
-                        
-                        <button class="btn btn-claude w-100">Enroll Now</button>
-                    </div>
-                </div>
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0" th:text="${product.name}">Course Name</h5>
+                <span class="badge-claude">New</span>
             </div>
+            <p class="card-text mb-4" th:text="${product.description}">Course Description</p>
+            
+            <form th:action="@{/api/enrollments/enroll}" method="post">
+                <input type="hidden" name="courseId" th:value="${product.id}" />
+                <button type="submit" class="btn btn-claude w-100">Enroll Now</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+            
         </div>
     </div>
     

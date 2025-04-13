@@ -27,7 +27,7 @@ public class CourseController {
     public String getProducts(Model model) {
         List<Course> products = productService.getCourses();
         model.addAttribute("products", products);
-        return "products"; // Refers to products.html in templates folder
+        return "courses"; // Refers to products.html in templates folder
     }
     @Autowired
     private EnrollmentService enrollmentService;
