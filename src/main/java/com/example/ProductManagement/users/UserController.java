@@ -3,12 +3,12 @@ package com.example.ProductManagement.users;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.example.ProductManagement.JWT.JwtService;
 
 import java.util.Map;
@@ -19,15 +19,8 @@ import java.util.Map;
 public class UserController {
 
     private final Userservice userService;
-    private CustomUserDetailsService userDetailsService;
     private final JwtService jwtService;
-
-    @Autowired
-    public UserController(Userservice userService, CustomUserDetailsService userDetailsService, JwtService jwtService) {
-        this.userService = userService;
-        this.userDetailsService = userDetailsService;
-        this.jwtService = jwtService;
-    }
+    // private final JwtService jwtService;
 
     @GetMapping("/test")
     public ResponseEntity<String> getTrialEndPoint() {
