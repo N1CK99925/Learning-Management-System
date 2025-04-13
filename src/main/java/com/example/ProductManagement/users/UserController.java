@@ -1,43 +1,63 @@
 package com.example.ProductManagement.users;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import com.example.ProductManagement.JWT.JwtService;
 
 import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 
+    
     private final Userservice userService;
+    private CustomUserDetailsService userDetailsService;
     private final JwtService jwtService;
-    // private final JwtService jwtService;
+    
+   
+    public UserController(Userservice userService, CustomUserDetailsService userDetailsService, JwtService jwtService) {
+        this.userService = userService;
+        this.userDetailsService = userDetailsService;
+        this.jwtService = jwtService;
+    }
 
     @GetMapping("/test")
     public ResponseEntity<String> getTrialEndPoint() {
-        return ResponseEntity.ok("Test endpoint is working");
-    }
+        return ResponseEntity.ok("This is a test message for a /test GET endpoint at this route.");
+    } 
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> registerUser(@RequestBody RegistrationRequest request) {
-        User savedUser = userService.registerUser(request.getEmail(), request.getPassword(), request.getUsername());
+    public ResponseEntity<UserResponse> registerUser(@RequestBody Map<String, String> requestBody) {
+
+        System.out.println("Registration request received for email: " + requestBody.get("email"));
+
+        UserDTO user = new UserDTO();
+        user.setEmail(requestBody.get("email"));
+        user.setUsername(requestBody.get("username"));
+        user.setPassword(requestBody.get("password"));
+
+        User savedUser = userService.registerUser(user);
+
         return ResponseEntity.ok(new UserResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUsername()));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody Map<String,String> requestBody, HttpSession session) {
-        String email = requestBody.get("email");
-        String password = requestBody.get("password");
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password, HttpSession session) {
+        
         try {
             User user = userService.authenticateUser(email, password);
             if (user == null) {
