@@ -290,9 +290,9 @@
 <form method="POST" action="/admin/files/upload" enctype="multipart/form-data">
     <label for="course">Select Course:</label>
     <select name="course_id" id="course" required>
-        <option th:each="course : ${courses}" 
-                th:value="${course.id}" 
-                th:text="${course.name}">
+        <option th:each="product : ${products}" 
+                th:value="${product.id}" 
+                th:text="${product.name}">
         </option>
     </select>
 
@@ -300,31 +300,46 @@
     <button type="submit">Upload PDF</button>
 </form>
 
-<h3>Uploaded PDFs</h3>
+<!-- <h3>Uploaded PDFs</h3>
 <div th:each="course : ${courses}">
     <h4 th:text="${course.name}"></h4>
     <ul>
         <li th:each="pdf : ${course.pdfFiles}">
             <a th:href="@{'/download/' + ${pdf}}" th:text="${pdf}"></a>
         </li>
-    </ul>
-</div>
-<table>
+    </ul> -->
+<!-- </div> -->
+<!-- <table>
     <tr>
         <th>Course Name</th>
         <th>Uploaded PDFs</th>
     </tr>
-    <tr th:each="course : ${courses}">
-        <td th:text="${course.name}"></td>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
         <td>
             <ul>
-                <li th:each="file : ${courseFiles[course.id]}">
-                    <a th:href="@{'/uploads/course_' + ${course.id} + '/' + ${file}}" th:text="${file}"></a>
+                <li th:each="file : ${courseFiles[product.id]}">
+                    <a th:href="@{'/uploads/course_' + ${product.id} + '/' + ${file}}" th:text="${file}"></a>
                 </li>
             </ul>
         </td>
     </tr>
-</table>
+</table> -->
+<footer class="py-4 mt-5" style="background-color: white; border-top: 1px solid var(--claude-grey-border);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="claude-logo mb-3">
+                    L<span>M</span>S
+                </div>
+                <p style="color: var(--claude-grey-medium);">Something You can write here</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p class="mb-0" style="color: var(--claude-grey-medium);">© 2025 Nick999. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
 

@@ -1,7 +1,7 @@
 package com.example.ProductManagement.config;
 
 import com.example.ProductManagement.JWT.JwtAuthenticationFilter;
-
+import com.example.ProductManagement.JWT.SessionTokenAuthenticationFilter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +14,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 @Configuration
 public class SecurityConfig {
+
+    private final SessionTokenAuthenticationFilter sessionTokenAuthenticationFilter;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, SessionTokenAuthenticationFilter sessionTokenAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.sessionTokenAuthenticationFilter = sessionTokenAuthenticationFilter;
     }
 
     @Bean
@@ -36,20 +40,21 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/courses").authenticated()
-                        .requestMatchers("/api/users/**","/register").permitAll()
-                        .requestMatchers("/admin/**").permitAll()
-                        .requestMatchers("/api/users/register").permitAll()
-                        .requestMatchers("/api/users/login").permitAll()
-                        .requestMatchers("/login").permitAll()
-                        .requestMatchers("/home").authenticated()
-                        .requestMatchers("/enrollments/**").authenticated()
-                        .requestMatchers("/logout").permitAll()
-                        .requestMatchers("/api/files/upload").permitAll()
-                        .requestMatchers("/upload").permitAll()
-                        .requestMatchers("/logout").permitAll()
-                        .requestMatchers("/my-courses").authenticated()
-                        .requestMatchers("/error").permitAll()
+                .requestMatchers("/courses").authenticated()
+                .requestMatchers("/api/users/**", "/register").permitAll()
+                .requestMatchers("/api/admin/**").permitAll()
+                .requestMatchers("/admin/**").permitAll()
+                .requestMatchers("/api/users/register").permitAll()
+                .requestMatchers("/api/users/login").permitAll()
+                .requestMatchers("/login").permitAll()
+                .requestMatchers("/home").authenticated()
+                .requestMatchers("/enrollments/**").authenticated()
+                .requestMatchers("/logout").permitAll()
+                .requestMatchers("/api/files/upload").permitAll()
+                .requestMatchers("/upload").permitAll()
+                .requestMatchers("/my-courses").authenticated()
+                .requestMatchers("/error").permitAll()
+                
                         
                           // Public authentication endpoints
                         .anyRequest().authenticated()
@@ -62,8 +67,11 @@ public class SecurityConfig {
 
                 .logout(logout -> logout.logoutUrl("/logout").permitAll())
                 
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .addFilterBefore(sessionTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        
 
         return http.build();
     }

@@ -1,9 +1,11 @@
 package com.example.ProductManagement.users;
 
 
+
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-
+import java.io.IOException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import com.example.ProductManagement.JWT.JwtService;
+
+
 
 import java.util.Map;
 
@@ -55,7 +59,7 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password, HttpSession session) {
+    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password, HttpSession session, HttpServletResponse response) {
         
         try {
             User user = userService.authenticateUser(email, password);
@@ -79,18 +83,25 @@ public class UserController {
             System.out.println("Testing Session :");
             System.out.println(session.getAttribute("user"));
 
-            return ResponseEntity.ok(Map.of(
-                    "token", token,
-                    "id", user.getId(),
-                    "email", user.getEmail(),
-                    "username", user.getUsername()
-            ));
+          
+            try {
+                response.sendRedirect("/home");
+                return ResponseEntity.ok().build();
+            } catch (IOException e) {
+                return ResponseEntity.status(500).body(Map.of("message", "Redirect failed: " + e.getMessage()));
+            }
+            // return ResponseEntity.ok(Map.of(
+            //         "token", token,
+            //         "id", user.getId(),
+            //         "email", user.getEmail(),
+            //         "username", user.getUsername()
+            // ));
         } catch (Exception e) {
             return ResponseEntity.status(401).body(Map.of("message", e.getMessage()));
         }
     }
 
-    // Other methods (commented out) remain unchanged...
+   
 }
 
 class RegistrationRequest {

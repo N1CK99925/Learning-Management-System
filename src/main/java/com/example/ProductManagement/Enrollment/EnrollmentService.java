@@ -35,4 +35,7 @@ public class EnrollmentService {
                           .map(Enrollment::getCourse)
                           .collect(Collectors.toList());
     }
+    public boolean isUserEnrolled(User user, Course course) {
+        return enrollmentRepository.existsByUserAndCourse(user, course);
+    }
 }
