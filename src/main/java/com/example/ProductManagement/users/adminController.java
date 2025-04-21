@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.ProductManagement.Admin.AdminService;
-import com.example.ProductManagement.Files.FileStorageService;
+
 import com.example.ProductManagement.product.Course;
 import com.example.ProductManagement.product.ProductService;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 
 @Controller
-@RequestMapping("/api/admin")
+@RequestMapping("/admin")
 public class adminController {
 
     @Autowired
@@ -97,26 +97,6 @@ public class adminController {
 
 
 }
-    @Autowired
-    private FileStorageService fileStorageService;
-
-    @GetMapping("/admin")
-    public String showUsers(Model model){
-        List<User> users = adminService.getAllUsers();
-        model.addAttribute("users", users);
-
-        List<Course> courses = productService.getCourses();
-        model.addAttribute("courses", courses);
-
-         Map<Long, List<String>> courseFiles = new HashMap<>();
-    for (Course course : courses) {
-        courseFiles.put(course.getId(), fileStorageService.getCourseFiles(course.getId()));
-    }
-
-    model.addAttribute("courseFiles", courseFiles);
-
-    return "admin";
-}
-
+   
 
 }
