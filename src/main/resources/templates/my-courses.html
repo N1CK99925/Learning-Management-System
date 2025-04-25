@@ -114,9 +114,46 @@
                 padding: 15px;
             }
         }
+        .nav-links {
+          display: flex;
+          gap: 20px;
+        }
+        
+        .nav-links a {
+          text-decoration: none;
+          color: #333333;
+          font-weight: 500;
+          transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+          color: #FF7A45;
+        }
+        
+        .nav-links a.active {
+          color: #FF7A45;
+          border-bottom: 2px solid #FF7A45;
+        }
+        .navbar-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 20px;
+        }
+        
+        
     </style>
 </head>
 <body>
+    <div class="navbar-container">
+        <div class="logo">LMS</div>
+        <div class="nav-links">
+          <a href="/home" class="active">Home</a>
+          <a href="/courses">Courses</a>
+          <a href="#">Resources</a>
+          <a href="#">Account</a>
+        </div>
+      </div>
 <div class="header">
     <h1>My Enrolled Courses</h1>
 </div>
@@ -130,7 +167,7 @@
         <h2 th:text="${course.name}">Course Title</h2>
         <p th:text="${course.description}">Course Description</p>
 
-        <div class="download-list" th:if="${!#lists.isEmpty(course.pdfFiles)}">
+        <!-- <div class="download-list" th:if="${!#lists.isEmpty(course.pdfFiles)}">
             <strong>Download Materials:</strong>
             <ul>
                 <li th:each="fileName : ${course.pdfFiles}">
@@ -138,9 +175,16 @@
                        th:text="${fileName}">PDF File</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>
+<h3>Course Materials</h3>
+<h2>In development</h2>
+<!-- <td>
+    <a th:href="@{'/my-courses/download/' + ${course.id}}" class="btn btn-sm btn-outline-primary">
+        Download PDF
+    </a>
+</td> -->
 
 </body>
 </html>

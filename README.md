@@ -77,6 +77,9 @@ mvn spring-boot:run
 - Implement video lectures
 - Add quizzes and assignments
 - Enable cloud storage (AWS S3, Firebase, etc.) for PDFs
+- Announcements
 
 
-
+// need to make test changing manually to ADMIN from ROLE_ADMIN in db and then make changes in the AdminService.java
+// also need to put the keys in .env file and edit the .gitignore file for it and destroy db from neon to prevent misuse after making repo public
+// need to re implement download and upload pdf controller
