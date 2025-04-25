@@ -97,6 +97,10 @@ public class adminController {
 
 
 }
-   
+@GetMapping("/upload/{courseId}")
+public String showUploadPage(@PathVariable Long courseId, Model model) {
+    model.addAttribute("courseId", courseId);
+    return "upload_material"; // Thymeleaf will render upload_material.html
+}
 
 }
