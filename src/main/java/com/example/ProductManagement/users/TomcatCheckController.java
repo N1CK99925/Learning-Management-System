@@ -8,7 +8,7 @@ public class TomcatCheckController {
 
     @GetMapping("/contact")
     public String checkTomcat() {
-        return "This is under developnment, tho it does not need much as its just a stupid repo on github ";
+        return "This is under developnment, lazy to work on this ";
     }
 }
 

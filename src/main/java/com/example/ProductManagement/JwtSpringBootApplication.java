@@ -27,4 +27,4 @@ public class JwtSpringBootApplication {
 	}
 }
 
-// currenlty Have disabled security fix needed
+// Currently have deleted the project from Neon DB
