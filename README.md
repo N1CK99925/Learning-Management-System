@@ -1,85 +1,155 @@
-# Learning Management System (LMS)
+# 📚 Learning Management System (LMS)
 
-## Overview
-This Learning Management System (LMS) allows administrators to manage courses and upload course materials (PDFs). Users can enroll in courses and access learning resources.
+![Java](https://img.shields.io/badge/Java-17-blue.svg)  
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Application-green.svg)  
+![Status](https://img.shields.io/badge/Status-Class%20Project-orange.svg)  
 
-## Features
+---
+
+## 🛠 Overview
+
+This **Learning Management System (LMS)** is a web application built as a class project in the 2nd semester. It enables administrators and students to manage and access courses and course materials (PDFs).  
+
+Though it's a school project, it’s designed such that it can be extended further — e.g. support videos, quizzes, cloud storage, etc.
+
+---
+
+## 🎯 Key Features
+
 - **Admin Panel**
-  - Add, edit, and delete courses
-  - Upload and manage course materials (PDFs)
-  - Manage users and enrollments
-- **User Panel**
-  - Browse available courses
-  - Enroll in courses
-  - Download course materials
+  - Create, update, delete courses  
+  - Upload and manage course materials (PDF)  
+  - Manage users and enrollment  
+- **Student (User) Panel**
+  - Browse available courses  
+  - Enroll in courses  
+  - Download course materials  
 - **Authentication & Authorization**
-  - User roles: Admin, Student
-  - JWT-based authentication
+  - User roles: `Admin`, `Student`  
+  - JWT-based login and access token  
+- **File Upload & Download**
+  - Admins upload PDF materials for courses  
+  - Students download materials of enrolled courses  
 
-## Technologies Used
-- **Backend:** Spring Boot (Java, Spring Security, Hibernate, JPA, PostgreSQL)
-- **Frontend:** Thymeleaf (or HTML, CSS, JavaScript if applicable)
-- **Database:** PostgreSQL (NeonDB Cloud)
-- **Storage:** Local file system or cloud storage (for PDFs)
-- **Deployment:** Render
+---
 
-## Installation & Setup
+## 🧱 Technologies Used
+
+| Component        | Technology / Framework                |
+|------------------|----------------------------------------|
+| Backend           | Spring Boot, Java, Spring Security, Hibernate, JPA |
+| Database          | PostgreSQL                              |
+| Frontend / Views  | Thymeleaf / HTML / CSS / JavaScript      |
+| Storage           | Local file system (for PDFs)             |
+| Build & Dependency | Maven                                  |
+
+---
+
+## 📁 Repository Structure
+
+Learning-Management-System/
+├── .mvn/
+├── src/
+│ ├── main/
+│ │ ├── java/ → Java source packages
+│ │ ├── resources/ → Configuration, templates, static files
+│ └── test/
+├── uploads/ → Uploaded course materials (PDFs)
+├── .gitattributes
+├── .gitignore
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+└── README.md
+
+yaml
+Copy code
+
+---
+
+## 🚀 Installation & Setup
+
 ### Prerequisites
-- Java 17+
-- PostgreSQL database
-- Maven
 
-### Clone the Repository
-```sh
-#    will add later 
-# cd 
-```
+- Java 17+  
+- PostgreSQL database  
+- Maven  
 
-### Configure the Database
-Update **application.properties**:
-```properties
-spring.datasource.url=jdbc:postgresql://your-db-url:5432/lms_db
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+### Steps
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/N1CK99925/Learning-Management-System.git
+   cd Learning-Management-System
+Configure the database
+In src/main/resources/application.properties (or application.yml), set your DB credentials:
+
+properties
+Copy code
+spring.datasource.url=jdbc:postgresql://<host>:<port>/<database_name>
+spring.datasource.username=<your_username>
+spring.datasource.password=<your_password>
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
-```
+Build & Run
 
-### Build & Run the Application
-```sh
+bash
+Copy code
 mvn clean install
 mvn spring-boot:run
-```
+The server should start (default port 8080 unless you changed it).
 
-### API Endpoints
-#### Authentication
-- `POST /api/users/register` - Register a new user
-- `POST /api/users/login` - Login and obtain JWT token
+🧭 API & Endpoints (Examples)
+Note: Some endpoints are protected (only admins can access). Use JWT for authorization.
 
-#### Courses
-- `GET /courses` - List all courses
-- `POST /admin/courses` (Admin only) - Create a course
-- `PUT /admin/courses/{id}` (Admin only) - Update a course
-- `DELETE /admin/courses/{id}` (Admin only) - Delete a course
+Authentication
+Action	Endpoint	Method	Description
+Register	POST /api/users/register	POST	Register a new user
+Login	POST /api/users/login	POST	Login and receive JWT token
 
-#### Course Materials (PDF Upload)
-- `POST /admin/courses/{id}/upload` (Admin only) - Upload PDF
-- `GET /courses/{id}/download` - Download course material
+Courses & Materials
+Endpoint	Method	Role	Description
+GET /courses	GET	Any	List all courses
+POST /admin/courses	POST	Admin only	Create new course
+PUT /admin/courses/{id}	PUT	Admin only	Update course metadata
+DELETE /admin/courses/{id}	DELETE	Admin only	Remove a course
+POST /admin/courses/{id}/upload	POST	Admin only	Upload PDF material for a course
+GET /courses/{id}/download	GET	Enrolled Students	Download course material
 
-## Deployment
-### Deploy to Render
-1. Push your code to GitHub.
-2. Create a new **Render** service for the backend.
-3. Add environment variables for **database credentials**.
-4. Deploy and monitor logs.
+Example of curl Request
+bash
+Copy code
+curl -X POST http://localhost:8080/api/users/login \
+     -H "Content-Type: application/json" \
+     -d '{"username":"student1","password":"pass123"}'
+You'll receive a JWT token in response, which you should include in Authorization: Bearer <token> header for subsequent protected endpoints.
 
-## Future Enhancements
-- Implement video lectures
-- Add quizzes and assignments
-- Enable cloud storage (AWS S3, Firebase, etc.) for PDFs
-- Announcements
+📌 Notes & Caveats
+The file upload / download flows are currently built for PDF files on local filesystem.
 
+To test admin-only features, you may need to manually assign the “ADMIN” role in the database.
 
-// need to make test changing manually to ADMIN from ROLE_ADMIN in db and then make changes in the AdminService.java
-// also need to put the keys in .env file and edit the .gitignore file for it and destroy db from neon to prevent misuse after making repo public
-// need to re implement download and upload pdf controller
+Sensitive keys or DB credentials should not be committed — consider using environment variables and .gitignore.
+
+Error handling and edge cases are minimal (this is primarily a class project).
+
+🔭 Future Enhancements
+Support for video lectures, audio, and rich media
+
+Quizzes, assignments, grading, and deadlines
+
+Notifications and announcements
+
+Cloud storage for course materials (AWS S3, GCP Storage)
+
+Better front-end (React, Angular, Vue)
+
+Role-based access extension (TA, Instructor)
+
+Logging, monitoring, and error dashboards
+
+Unit tests and integration tests
+
+🤝 Contribution & Licensing
+Contributions:
+This is a student project, but feel free to fork it, submit issues, or make improvements. If you're adding features, open a PR and note what you changed.
