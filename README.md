@@ -2,7 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Java-17-blue.svg)  
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Application-green.svg)  
-![Status](https://img.shields.io/badge/Status-Class%20Project-orange.svg)  
+![Status](https://img.shields.io/badge/Sem%20Project-orange.svg)  
 
 ---
 
@@ -10,7 +10,7 @@
 
 This **Learning Management System (LMS)** is a web application built as a class project in the 2nd semester. It enables administrators and students to manage and access courses and course materials (PDFs).  
 
-Though it's a school project, it’s designed such that it can be extended further — e.g. support videos, quizzes, cloud storage, etc.
+Though it's College Sem 2, it’s designed such that it can be extended further — e.g. support videos, quizzes, cloud storage, etc.
 
 ---
 
