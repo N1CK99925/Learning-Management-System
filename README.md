@@ -45,27 +45,6 @@ Though it's College Sem 2, it’s designed such that it can be extended further 
 
 ---
 
-## 📁 Repository Structure
-
-Learning-Management-System/
-├── .mvn/
-├── src/
-│ ├── main/
-│ │ ├── java/ → Java source packages
-│ │ ├── resources/ → Configuration, templates, static files
-│ └── test/
-├── uploads/ → Uploaded course materials (PDFs)
-├── .gitattributes
-├── .gitignore
-├── mvnw
-├── mvnw.cmd
-├── pom.xml
-└── README.md
-
-yaml
-Copy code
-
----
 
 ## 🚀 Installation & Setup
 
