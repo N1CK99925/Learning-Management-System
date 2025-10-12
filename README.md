@@ -1,6 +1,6 @@
 # 📚 Learning Management System (LMS)
 
-![Java](https://img.shields.io/badge/Java-17-blue.svg)  
+![Java](https://img.shields.io/badge/Java-23-blue.svg)  
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Application-green.svg)  
 ![Status](https://img.shields.io/badge/Sem%20Project-orange.svg)  
 
