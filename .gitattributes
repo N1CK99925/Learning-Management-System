@@ -1,8 +1,0 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
-# Ignore template files from being counted too much
-src/main/resources/templates/* linguist-documentation
-src/main/resources/static/* linguist-documentation
-
-# Ensure Java files are counted
-*.java linguist-detectable=true
