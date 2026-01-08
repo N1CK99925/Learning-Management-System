@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LearningManagementSystemApplication<lms>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "lms.lms.LearningManagementSystemApplication",
+            "projectName": "lms",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
