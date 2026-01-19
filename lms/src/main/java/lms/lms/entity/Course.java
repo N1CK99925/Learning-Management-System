@@ -35,6 +35,10 @@ public class Course {
     @Column(nullable = false)
     private String category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private User teacher;
+
     @ElementCollection
     @CollectionTable(name = "course_materials", joinColumns = @JoinColumn(name = "course_id"))
     @Column(name = "file_path")
@@ -44,6 +48,12 @@ public class Course {
     @Builder.Default
     @Column(nullable = false)
     private Boolean active = true;
+
+    @Column(name = "start_date")
+    private LocalDateTime startDate;
+
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -60,7 +70,6 @@ public class Course {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
-
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();

@@ -30,8 +30,10 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+.vscode
 application.yaml
 META-INF
-
-application.properties
+launch.json
+.vscode
+.vscode\launch.json
+.vscode\settings.json

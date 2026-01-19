@@ -344,3 +344,5 @@ You can test the API using tools like:
 4. Push to the branch
 5. Create a Pull Request
 
+
+TODO = Fix rate limit for diff endpointws , currently using same rate limit for every end point
