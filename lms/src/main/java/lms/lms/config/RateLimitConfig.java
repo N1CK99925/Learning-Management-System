@@ -9,6 +9,8 @@ import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.codec.ByteArrayCodec;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.codec.StringCodec;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,9 +19,17 @@ import java.time.Duration;
 @Configuration
 public class RateLimitConfig {
     // 1. Define a standard RedisClient bean
+
+    @Value("${spring.data.redis.host:localhost}")
+    private String redisHost;
+
+    @Value("${spring.data.redis.port:6379}")
+    private int redisPort;
+
     @Bean
     public RedisClient redisClient() {
-        return RedisClient.create("redis://localhost:6379");
+          String redisUri = String.format("redis://%s:%d", redisHost, redisPort);
+        return RedisClient.create(redisUri);
     }
     // 2. Create the specific connection Bucket4j needs
     @Bean(destroyMethod = "close")
