@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './layouts/DashboardLayout';
 import StudentDashboard from './pages/StudentDashboard';
 import CourseCatalog from './pages/CourseCatalog';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+
 
           {/* Protected Student Routes */}
           {/* We wrap the routes in ProtectedRoute and pass the required role */}

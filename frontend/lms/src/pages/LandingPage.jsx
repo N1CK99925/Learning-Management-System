@@ -28,9 +28,9 @@ const LandingPage = () => {
                             <Link to="/login" className="hidden md:flex cursor-pointer items-center justify-center rounded-lg h-10 px-6 text-text-main text-sm font-bold hover:bg-gray-50 transition-colors">
                                 Log in
                             </Link>
-                            <button className="flex cursor-pointer items-center justify-center rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold shadow-md hover:bg-primary-dark transition-colors">
+                            <Link to="/register" className="flex cursor-pointer items-center justify-center rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold shadow-md hover:bg-primary-dark transition-colors">
                                 Register
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

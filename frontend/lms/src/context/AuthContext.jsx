@@ -38,8 +38,49 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  // In your AuthContext
+  const register = async (username, email, password) => {
+    try {
+      const res = await api.post('/auth/register', { 
+        username, 
+        email, 
+        password 
+      });
+      
+      // The backend returns a UserResponse object
+      // You can optionally auto-login after registration
+      // or just return the data and redirect to login
+      return res.data;
+    } catch (error) {
+      // Handle backend validation errors
+      if (error.response?.data) {
+        // Backend returns field-specific errors for validation
+        const errorData = error.response.data;
+        
+        // If it's a validation error with multiple fields
+          if (typeof errorData === 'object') {
+    if (errorData.errors) {
+      const errorMessage = Object.values(errorData.errors).join(', ');
+      throw new Error(errorMessage);
+    }
+
+    if (errorData.message) {
+      throw new Error(errorData.message);
+    }
+  }
+
+        
+        // If it's a single error message
+        throw new Error(errorData.error || 'Registration failed');
+      }
+      
+      throw new Error(error.message || 'Registration failed');
+    }
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout,register, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );
