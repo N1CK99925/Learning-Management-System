@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = () => {
+const SidebarH = () => {
     return (
         <aside className="w-64 bg-white border-r border-[#f0ece9] flex-shrink-0 flex-col h-full z-20 hidden md:flex">
             <div className="p-6 pb-2">
@@ -70,4 +70,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default SidebarH;

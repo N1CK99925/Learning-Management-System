@@ -1,7 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import {React, useState} from 'react';
+import { Link , useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
+
+
+
+
 
 const LoginPage = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
+     const handleLogin = async () => {
+        console.log("Attempting login with:", { email, password });
+    try {
+      const user = await login(email, password);
+
+      if (user.role === "STUDENT") navigate("/student/dashboard");
+      else if (user.role === "INSTRUCTOR") navigate("/instructor/dashboard");
+      else navigate("/");
+    } catch {
+      setError("Invalid credentials");
+    }
+  };
+
     return (
         <div className="bg-[#f9fafa] min-h-screen flex flex-col justify-center items-center p-4 relative overflow-hidden font-sans text-text-main">
             {/* Subtle Abstract Background Pattern */}
@@ -36,8 +61,10 @@ const LoginPage = () => {
                             <input
                                 className="form-input block w-full rounded-lg border-gray-200 bg-gray-50/30 text-text-main text-sm pl-10 pr-4 py-3 focus:border-primary focus:ring focus:ring-primary/20 focus:bg-white transition-all duration-200 placeholder:text-gray-400"
                                 id="email"
+                                value={email}
                                 placeholder="name@company.com"
                                 type="email"
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                     </div>
@@ -55,6 +82,8 @@ const LoginPage = () => {
                                 id="password"
                                 placeholder="••••••••"
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <button className="absolute right-3.5 text-gray-400 hover:text-gray-600 focus:outline-none flex items-center justify-center transition-colors" type="button">
                                 <span className="material-symbols-outlined text-[20px]">visibility</span>
@@ -62,12 +91,16 @@ const LoginPage = () => {
                         </div>
                     </div>
 
-                    {/* Login Button */}
-                    <Link to="/student/dashboard" className="w-full bg-primary hover:bg-primary-hover text-white font-bold text-sm py-3.5 rounded-lg shadow-[0_2px_10px_rgba(234,119,11,0.2)] hover:shadow-[0_4px_12px_rgba(234,119,11,0.3)] active:scale-[0.99] transition-all duration-200 flex justify-center items-center gap-2 mt-2">
-                        <span>Log In</span>
-                        <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                    </Link>
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
 
+                    {/* Login Button */}
+                   <button
+                    onClick={handleLogin}
+                    className="w-full bg-primary hover:bg-primary-hover text-white font-bold text-sm py-3.5 rounded-lg shadow-[0_2px_10px_rgba(234,119,11,0.2)] hover:shadow-[0_4px_12px_rgba(234,119,11,0.3)] active:scale-[0.99] transition-all duration-200 flex justify-center items-center gap-2 mt-2"
+                    >
+                    <span>Log In</span>
+                    <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
                     {/* Divider */}
                     <div className="relative flex py-2 items-center">
                         <div className="flex-grow border-t border-gray-100"></div>
