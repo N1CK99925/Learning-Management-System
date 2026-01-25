@@ -90,5 +90,50 @@ public class Course {
             availableSeats++;
         }
     }
+     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor; // change from teacher
+    
+    private String coverImageUrl;
+    private String previewVideoUrl;
+    
+    @Enumerated(EnumType.STRING)
+    private DifficultyLevel level; // BEGINNER, INTERMEDIATE, ADVANCED
+    
+    @ElementCollection
+    @Builder.Default
+    private List<String> learningOutcomes = new ArrayList<>();
+    
+    @ElementCollection
+    @Builder.Default
+    private List<String> prerequisites = new ArrayList<>();
+    
+    private Integer estimatedDuration; // in hours
+    
+    @Column(columnDefinition = "DECIMAL(3,2)")
+    private Double averageRating; // 0.00 to 5.00
+    
+    private Integer totalReviews;
+    
+    private Integer totalEnrollments;
+    
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Module> modules = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "course")
+    @Builder.Default
+    private List<Review> reviews = new ArrayList<>();
+    
+    @Builder.Default
+    private Boolean isFeatured = false;
+    
+    @ElementCollection
+    @Builder.Default
+    private List<String> tags = new ArrayList<>();
+    
+    public enum DifficultyLevel {
+        BEGINNER, INTERMEDIATE, ADVANCED, ALL_LEVELS
+    }
 }
 
